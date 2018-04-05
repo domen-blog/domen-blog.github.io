@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ZeroJudge d712 - The 3n + 1 problem | Domen&#39;s Programming World</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Link: http://zerojudge.tw/ShowProblem?problemid=d712 Zerojudge原創題庫，UVA 100的加強版 (其實差滿多的)先DP算好n=1~1000000時的cycle length，建立線段樹，之後就直接查詢RMQ就行了，然後有個i&amp;gt;j的陷阱(竟然掉進去了真不應該)">
+<meta name="keywords" content="Segment Tree,ZeroJudge,DP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ZeroJudge d712 - The 3n + 1 problem">
+<meta property="og:url" content="https://domen-blog.github.io/posts/2015-09-27/zerojudge-d712/index.html">
+<meta property="og:site_name" content="Domen&#39;s Programming World">
+<meta property="og:description" content="Link: http://zerojudge.tw/ShowProblem?problemid=d712 Zerojudge原創題庫，UVA 100的加強版 (其實差滿多的)先DP算好n=1~1000000時的cycle length，建立線段樹，之後就直接查詢RMQ就行了，然後有個i&amp;gt;j的陷阱(竟然掉進去了真不應該)">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-04-05T03:40:11.043Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ZeroJudge d712 - The 3n + 1 problem">
+<meta name="twitter:description" content="Link: http://zerojudge.tw/ShowProblem?problemid=d712 Zerojudge原創題庫，UVA 100的加強版 (其實差滿多的)先DP算好n=1~1000000時的cycle length，建立線段樹，之後就直接查詢RMQ就行了，然後有個i&amp;gt;j的陷阱(竟然掉進去了真不應該)">
+<link rel="publisher" href="https://plus.google.com/+%E8%98%87%E5%A4%9A%E9%96%80domen">
+  
+    <link rel="alternative" href="/atom.xml" title="Domen&#39;s Programming World" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-49513664-2', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div id="header">
+  <div id="banner">
+    <div id="cover"></div>
+    <div id="stars"></div>
+  </div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Domen&#39;s Programming World</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">domen111 @ TFcis 16</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About Me</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://domen-blog.github.io"></form>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="outer">
+        <section id="main"><article id="post-zerojudge-d712" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/posts/2015-09-27/zerojudge-d712/" class="article-date">
+  <time datetime="2015-09-26T16:00:00.000Z" itemprop="datePublished">2015-09-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/competitive-programming/">Competitive Programming</a>►<a class="article-category-link" href="/categories/competitive-programming/problems/">Problems</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ZeroJudge d712 - The 3n + 1 problem
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Link: <a href="http://zerojudge.tw/ShowProblem?problemid=d712" target="_blank" rel="noopener">http://zerojudge.tw/ShowProblem?problemid=d712</a></p>
+<p>Zerojudge原創題庫，UVA 100的加強版 (其實差滿多的)<br>先DP算好n=1~1000000時的cycle length，建立線段樹，之後就直接查詢RMQ就行了，然後有個i&gt;j的陷阱(竟然掉進去了真不應該)<br><a id="more"></a><br><figure class="highlight cpp"><figcaption><span>AC code</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX 1000000</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> dp[MAX+<span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> seg[<span class="number">4000010</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">solve</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n&lt;=MAX &amp;&amp; dp[n]!=<span class="number">-1</span>) <span class="keyword">return</span> dp[n];</span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">if</span>(n%<span class="number">2</span>==<span class="number">0</span>) a=solve(n/<span class="number">2</span>)+<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span> a=solve(<span class="number">3</span>*n+<span class="number">1</span>)+<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(n&lt;=MAX) dp[n]=a;</span><br><span class="line">    <span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> idx)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(l==r) seg[idx]=dp[l];</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> mid=(l+r)/<span class="number">2</span>;</span><br><span class="line">        build(l,mid,idx*<span class="number">2</span>);</span><br><span class="line">        build(mid+<span class="number">1</span>,r,idx*<span class="number">2</span>+<span class="number">1</span>);</span><br><span class="line">        seg[idx]=max(seg[idx*<span class="number">2</span>],seg[idx*<span class="number">2</span>+<span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> L,<span class="keyword">int</span> R,<span class="keyword">int</span> idx)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(l==L&amp;&amp;r==R) <span class="keyword">return</span> seg[idx];</span><br><span class="line">    <span class="keyword">int</span> mid=(L+R)/<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span>(r&lt;=mid) <span class="keyword">return</span> query(l,r,L,mid,idx*<span class="number">2</span>);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(l&gt;mid) <span class="keyword">return</span> query(l,r,mid+<span class="number">1</span>,R,idx*<span class="number">2</span>+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> max( query(l,mid,L,mid,idx*<span class="number">2</span>), query(mid+<span class="number">1</span>,r,mid+<span class="number">1</span>,R,idx*<span class="number">2</span>+<span class="number">1</span>) );</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ios::sync_with_stdio(<span class="number">0</span>);</span><br><span class="line">    <span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">memset</span>(dp,<span class="number">-1</span>,<span class="keyword">sizeof</span> dp);</span><br><span class="line">    dp[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=MAX;i++)</span><br><span class="line">        solve(i);</span><br><span class="line">    build(<span class="number">1</span>,MAX,<span class="number">1</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> i,j,l,r;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;i&gt;&gt;j)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(i&gt;j) tie(l,r)=make_tuple(j,i);</span><br><span class="line">        <span class="keyword">else</span> tie(l,r)=make_tuple(i,j);</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;i&lt;&lt;<span class="string">' '</span>&lt;&lt;j&lt;&lt;<span class="string">' '</span>&lt;&lt;query(l,r,<span class="number">1</span>,MAX,<span class="number">1</span>)&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://domen-blog.github.io/posts/2015-09-27/zerojudge-d712/" data-id="cjflzb0ay002m7z3fkczxerg7" class="article-share-link">Share</a>
+      
+        <a href="https://domen-blog.github.io/posts/2015-09-27/zerojudge-d712/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dp/">DP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/segment-tree/">Segment Tree</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/zerojudge/">ZeroJudge</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/posts/2015-10-03/c-stl-nth-element/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          C++ STL nth_element
+        
+      </div>
+    </a>
+  
+  
+    <a href="/posts/2015-09-20/tioj-1851/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">TIOJ 1851 - 第五顆星球的點燈人</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/algorithm/">Algorithm</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">Blog</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/competitive-programming/">Competitive Programming</a><span class="category-list-count">26</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/competitive-programming/introduction/">Introduction</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/competitive-programming/problems/">Problems</a><span class="category-list-count">24</span></li></ul></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/bit/">BIT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bst/">BST</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codeforces/">Codeforces</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dp/">DP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/google-code-jam/">Google Code Jam</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/graph/">Graph</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hoj/">HOJ</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ioi/">IOI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/poj/">POJ</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/segment-tree/">Segment Tree</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tioj/">TIOJ</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/toj/">TOJ</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/two-pointer/">Two Pointer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uva/">UVa</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xor/">XOR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zerojudge/">ZeroJudge</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/math/">math</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ntucsiec2016/">ntucsiec2016</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/樹壓平/">樹壓平</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/bit/" style="font-size: 15px;">BIT</a> <a href="/tags/bst/" style="font-size: 10px;">BST</a> <a href="/tags/codeforces/" style="font-size: 10px;">Codeforces</a> <a href="/tags/dp/" style="font-size: 10px;">DP</a> <a href="/tags/google-code-jam/" style="font-size: 10px;">Google Code Jam</a> <a href="/tags/graph/" style="font-size: 10px;">Graph</a> <a href="/tags/hoj/" style="font-size: 10px;">HOJ</a> <a href="/tags/ioi/" style="font-size: 10px;">IOI</a> <a href="/tags/poj/" style="font-size: 10px;">POJ</a> <a href="/tags/segment-tree/" style="font-size: 15px;">Segment Tree</a> <a href="/tags/tioj/" style="font-size: 20px;">TIOJ</a> <a href="/tags/toj/" style="font-size: 15px;">TOJ</a> <a href="/tags/two-pointer/" style="font-size: 10px;">Two Pointer</a> <a href="/tags/uva/" style="font-size: 15px;">UVa</a> <a href="/tags/xor/" style="font-size: 10px;">XOR</a> <a href="/tags/zerojudge/" style="font-size: 15px;">ZeroJudge</a> <a href="/tags/math/" style="font-size: 10px;">math</a> <a href="/tags/ntucsiec2016/" style="font-size: 10px;">ntucsiec2016</a> <a href="/tags/樹壓平/" style="font-size: 10px;">樹壓平</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/posts/2016-09-19/online-judge-multiple-input/">Online Judge 基礎觀念：多測資輸入不需把資料都讀入後再輸出</a>
+          </li>
+        
+          <li>
+            <a href="/posts/2016-04-14/uva-1569/">UVa 1569 - Multiple</a>
+          </li>
+        
+          <li>
+            <a href="/posts/2016-04-11/tioj-1272/">TIOJ 1272 - The Agency</a>
+          </li>
+        
+          <li>
+            <a href="/posts/2016-04-10/google-code-jam-introduction/">Google Code Jam 賽制介紹</a>
+          </li>
+        
+          <li>
+            <a href="/posts/2016-04-03/ioi-2014-game/">IOI 2014 - 猜謎遊戲(game), TIOJ 1896</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+  <h3 class="widget-title">Friends&#39; Blogs</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://codingsimplifylife.blogspot.tw/" target="_blank">code風景區</a>
+          </li>
+        
+          <li>
+            <a href="https://chino.taipei/" target="_blank">Chino&#39;s</a>
+          </li>
+        
+          <li>
+            <a href="http://codingbeans.blogspot.tw/" target="_blank">Coding Beans</a>
+          </li>
+        
+          <li>
+            <a href="https://lfswang.github.io/" target="_blank">LFsWang</a>
+          </li>
+        
+          <li>
+            <a href="http://scj-code.blogspot.tw/" target="_blank">程式競賽解題 (scj-code)</a>
+          </li>
+        
+          <li>
+            <a href="http://codingdream1373.blogspot.tw/" target="_blank">codingdream</a>
+          </li>
+        
+          <li>
+            <a href="https://johnchen902.github.io/blog/" target="_blank">johnchen902&#39;s Blog</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <div id="footer">
+  
+  <div id='foot-stars'></div>
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Domen Su<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</div>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About Me</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'domenblog';
+  
+  var disqus_url = 'https://domen-blog.github.io/posts/2015-09-27/zerojudge-d712/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

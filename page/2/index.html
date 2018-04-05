@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Domen&#39;s Programming World</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Domen&#39;s Programming World">
+<meta property="og:url" content="https://domen-blog.github.io/page/2/index.html">
+<meta property="og:site_name" content="Domen&#39;s Programming World">
+<meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Domen&#39;s Programming World">
+<link rel="publisher" href="https://plus.google.com/+%E8%98%87%E5%A4%9A%E9%96%80domen">
+  
+    <link rel="alternative" href="/atom.xml" title="Domen&#39;s Programming World" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-49513664-2', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div id="header">
+  <div id="banner">
+    <div id="cover"></div>
+    <div id="stars"></div>
+  </div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Domen&#39;s Programming World</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">domen111 @ TFcis 16</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About Me</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://domen-blog.github.io"></form>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-tioj-1210" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/posts/2015-10-24/tioj-1210/" class="article-date">
+  <time datetime="2015-10-23T16:00:00.000Z" itemprop="datePublished">2015-10-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/competitive-programming/">Competitive Programming</a>►<a class="article-category-link" href="/categories/competitive-programming/problems/">Problems</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/posts/2015-10-24/tioj-1210/">1210 - 圖論 之 簡單圖測試</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Link: <a href="http://tioj.ck.tp.edu.tw/problems/1210" target="_blank" rel="noopener">http://tioj.ck.tp.edu.tw/problems/1210</a><br>一開始想說隨便亂連，如果發現不能連就不是簡單圖，後來發現是假解，試試以下這筆測資:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">1 1 2</span><br><span class="line">0</span><br></pre></td></tr></table></figure></p>
+<p>如果一開始前2個點連在一起，就會造成第3個點無法連邊，但事實上可以前2點分別和第3點相連</p>
+<p>後來改變作法，每次從度數最大的點開始連就對了，查了一下原來這是Havel定理<br>這篇好像說明得不錯，有Havel定理的證明<br><a href="http://blog.csdn.net/shuangde800/article/details/7857246" target="_blank" rel="noopener">http://blog.csdn.net/shuangde800/article/details/7857246</a></p>
+<p>發現UVA上有一模一樣的題目(僅輸出格式不同): UVa 10720<br>POJ上的類似題，需要輸出相連關係: POJ 1659</p>
+        
+          <p class="article-more-link">
+            <a href="/posts/2015-10-24/tioj-1210/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://domen-blog.github.io/posts/2015-10-24/tioj-1210/" data-id="cjflzb0a300117z3fkzvkavi7" class="article-share-link">Share</a>
+      
+        <a href="https://domen-blog.github.io/posts/2015-10-24/tioj-1210/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/graph/">Graph</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tioj/">TIOJ</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-c-stl-nth-element" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/posts/2015-10-03/c-stl-nth-element/" class="article-date">
+  <time datetime="2015-10-02T16:00:00.000Z" itemprop="datePublished">2015-10-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/algorithm/">Algorithm</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/posts/2015-10-03/c-stl-nth-element/">C++ STL nth_element</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><code>std::nth_element</code>保證在O(n)的時間複雜度內求出陣列中第k大的數字<br><a href="http://www.cplusplus.com/reference/algorithm/nth_element/" target="_blank" rel="noopener">http://www.cplusplus.com/reference/algorithm/nth_element/</a></p>
+<p>用法網路上應該有很多說明，在此就不再解說了，不過關於它的原理網路上的中文文章就有點少了</p>
+<p><code>nth_element</code>使用的演算法是<a href="https://en.wikipedia.org/wiki/Introselect" title="Introselect wikipedia" target="_blank" rel="noopener">Introselect</a>，Introselect算是優化過後的<a href="https://en.wikipedia.org/wiki/Quickselect" title="Quickselect wikipedia" target="_blank" rel="noopener">Quickselect</a></p>
+<p>Quickselect的概念大概是做一半的Quicksort，Quicksort平均來說需要做lg(n)次，每次O(n)，但Quickselect每次只需做和自己相關的那一半就好了，也就是說第1次O(n),第2次O(n/2),第3次O(n/4),第4次O(n/8)…，n+n/2+n/4+n/8+n/16…=2*n，因此總複雜度為O(n)<br>
+        
+          <p class="article-more-link">
+            <a href="/posts/2015-10-03/c-stl-nth-element/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://domen-blog.github.io/posts/2015-10-03/c-stl-nth-element/" data-id="cjflzb09c00047z3f9d91iig4" class="article-share-link">Share</a>
+      
+        <a href="https://domen-blog.github.io/posts/2015-10-03/c-stl-nth-element/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-zerojudge-d712" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/posts/2015-09-27/zerojudge-d712/" class="article-date">
+  <time datetime="2015-09-26T16:00:00.000Z" itemprop="datePublished">2015-09-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/competitive-programming/">Competitive Programming</a>►<a class="article-category-link" href="/categories/competitive-programming/problems/">Problems</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/posts/2015-09-27/zerojudge-d712/">ZeroJudge d712 - The 3n + 1 problem</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Link: <a href="http://zerojudge.tw/ShowProblem?problemid=d712" target="_blank" rel="noopener">http://zerojudge.tw/ShowProblem?problemid=d712</a></p>
+<p>Zerojudge原創題庫，UVA 100的加強版 (其實差滿多的)<br>先DP算好n=1~1000000時的cycle length，建立線段樹，之後就直接查詢RMQ就行了，然後有個i&gt;j的陷阱(竟然掉進去了真不應該)<br>
+        
+          <p class="article-more-link">
+            <a href="/posts/2015-09-27/zerojudge-d712/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://domen-blog.github.io/posts/2015-09-27/zerojudge-d712/" data-id="cjflzb0ay002m7z3fkczxerg7" class="article-share-link">Share</a>
+      
+        <a href="https://domen-blog.github.io/posts/2015-09-27/zerojudge-d712/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dp/">DP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/segment-tree/">Segment Tree</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/zerojudge/">ZeroJudge</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-tioj-1851" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/posts/2015-09-20/tioj-1851/" class="article-date">
+  <time datetime="2015-09-19T16:00:00.000Z" itemprop="datePublished">2015-09-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/competitive-programming/">Competitive Programming</a>►<a class="article-category-link" href="/categories/competitive-programming/problems/">Problems</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/posts/2015-09-20/tioj-1851/">TIOJ 1851 - 第五顆星球的點燈人</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Link: <a href="http://tioj.ck.tp.edu.tw/problems/1851" target="_blank" rel="noopener">http://tioj.ck.tp.edu.tw/problems/1851</a></p>
+<p>基本上就是求N有幾個因數，如果有偶數個輸出no，奇數個輸出yes<br>由於因數是兩兩成對的，所以只要判斷n是不是一個完全平方數即可<br>
+        
+          <p class="article-more-link">
+            <a href="/posts/2015-09-20/tioj-1851/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://domen-blog.github.io/posts/2015-09-20/tioj-1851/" data-id="cjflzb0ao00227z3fktsoyyf5" class="article-share-link">Share</a>
+      
+        <a href="https://domen-blog.github.io/posts/2015-09-20/tioj-1851/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tioj/">TIOJ</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-poj-1456" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/posts/2015-09-15/poj-1456/" class="article-date">
+  <time datetime="2015-09-14T16:00:00.000Z" itemprop="datePublished">2015-09-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/competitive-programming/">Competitive Programming</a>►<a class="article-category-link" href="/categories/competitive-programming/problems/">Problems</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/posts/2015-09-15/poj-1456/">POJ 1456 - Supermarket</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Link: <a href="http://poj.org/problem?id=1456" target="_blank" rel="noopener">http://poj.org/problem?id=1456</a></p>
+<p>把物品丟到時間軸上，反過來做就變成水題了，用priority_queue即可<br>滿有趣的一題，關鍵在於能不能想到把時間反轉解決<br>
+        
+          <p class="article-more-link">
+            <a href="/posts/2015-09-15/poj-1456/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://domen-blog.github.io/posts/2015-09-15/poj-1456/" data-id="cjflzb09y000t7z3f8s9exihy" class="article-share-link">Share</a>
+      
+        <a href="https://domen-blog.github.io/posts/2015-09-15/poj-1456/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/poj/">POJ</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-codeforces-280b" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/posts/2015-09-14/codeforces-280b/" class="article-date">
+  <time datetime="2015-09-13T16:00:00.000Z" itemprop="datePublished">2015-09-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/competitive-programming/">Competitive Programming</a>►<a class="article-category-link" href="/categories/competitive-programming/problems/">Problems</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/posts/2015-09-14/codeforces-280b/">Codeforces 280B - Maximum Xor Secondary</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Link: <a href="http://codeforces.com/problemset/problem/280/B" target="_blank" rel="noopener">http://codeforces.com/problemset/problem/280/B</a></p>
+<p>我的作法頗奇怪的，貼出來分享一下<br>這題可以用stack單調性O(n)解決，聽起來還滿簡單的，不過我想到的方法不太一樣(反正這題應該有很多種解法)</p>
+<p>作法大概是把數字看成二進位，計算它們的有多少位元，要xor的兩個數字的位元數一定不同(除非所有數字位元數相同)，而且其中一個必有最大位元數，暴力弄一弄複雜度還是O(n) (見27行以後)<br>所有數字位元數相同時，其實可以處理成位元數不同 (見14~25行)</p>
+<p>AC submission: <a href="http://codeforces.com/contest/280/submission/12995655" target="_blank" rel="noopener">http://codeforces.com/contest/280/submission/12995655</a><br>
+        
+          <p class="article-more-link">
+            <a href="/posts/2015-09-14/codeforces-280b/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://domen-blog.github.io/posts/2015-09-14/codeforces-280b/" data-id="cjflzb09e00057z3fifuhkzvs" class="article-share-link">Share</a>
+      
+        <a href="https://domen-blog.github.io/posts/2015-09-14/codeforces-280b/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codeforces/">Codeforces</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-tioj-1535" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/posts/2015-08-30/tioj-1535/" class="article-date">
+  <time datetime="2015-08-29T16:00:00.000Z" itemprop="datePublished">2015-08-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/competitive-programming/">Competitive Programming</a>►<a class="article-category-link" href="/categories/competitive-programming/problems/">Problems</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/posts/2015-08-30/tioj-1535/">TIOJ 1535 - 嘿!! Let&#39;s Go E-m-i-r-p!!</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Link: <a href="http://tioj.ck.tp.edu.tw/problems/1535" target="_blank" rel="noopener">http://tioj.ck.tp.edu.tw/problems/1535</a></p>
+<p>質數建表然後判斷是不是Emirp，至於要建到多大的質數表就在本機跑跑看，我的寫法MAX必須是10的次方否則判斷反轉時會RE，於是我用個bitset壓記憶體就過了</p>
+        
+          <p class="article-more-link">
+            <a href="/posts/2015-08-30/tioj-1535/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://domen-blog.github.io/posts/2015-08-30/tioj-1535/" data-id="cjflzb0ak001v7z3f7flnpcyh" class="article-share-link">Share</a>
+      
+        <a href="https://domen-blog.github.io/posts/2015-08-30/tioj-1535/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tioj/">TIOJ</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-tioj-1305" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/posts/2015-08-23/tioj-1305/" class="article-date">
+  <time datetime="2015-08-22T16:00:00.000Z" itemprop="datePublished">2015-08-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/competitive-programming/">Competitive Programming</a>►<a class="article-category-link" href="/categories/competitive-programming/problems/">Problems</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/posts/2015-08-23/tioj-1305/">TIOJ 1305 - 啊嘶起啦集合</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Link: <a href="http://tioj.ck.tp.edu.tw/problems/1305" target="_blank" rel="noopener">http://tioj.ck.tp.edu.tw/problems/1305</a></p>
+<p>練習平衡樹的裸題，不過我用黑魔法把它AC了<br>使用g++內建的非標準類別<code>tree</code>，使用說明參考: <a href="http://blog.csdn.net/nilihan1999/article/details/29858309" target="_blank" rel="noopener">http://blog.csdn.net/nilihan1999/article/details/29858309</a></p>
+<p>一開始WA還不知道為什麼，原來是ask的k有可能 &lt; 1</p>
+        
+          <p class="article-more-link">
+            <a href="/posts/2015-08-23/tioj-1305/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://domen-blog.github.io/posts/2015-08-23/tioj-1305/" data-id="cjflzb0a500167z3fxwvyojxg" class="article-share-link">Share</a>
+      
+        <a href="https://domen-blog.github.io/posts/2015-08-23/tioj-1305/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bst/">BST</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tioj/">TIOJ</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-tioj-1667" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/posts/2015-08-23/tioj-1667/" class="article-date">
+  <time datetime="2015-08-22T16:00:00.000Z" itemprop="datePublished">2015-08-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/competitive-programming/">Competitive Programming</a>►<a class="article-category-link" href="/categories/competitive-programming/problems/">Problems</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/posts/2015-08-23/tioj-1667/">TIOJ 1667 - reversed</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Link: <a href="http://tioj.ck.tp.edu.tw/problems/1667" target="_blank" rel="noopener">http://tioj.ck.tp.edu.tw/problems/1667</a></p>
+<p>逆序數對裸題，這題的N有點小，感覺好像也可以暴力做，不過懶得測試暴力法</p>
+<p><strong>解法</strong>: 用BIT做逆序數對+離散化，因為他給的數字不保證&lt;=100所以需要事先做離散化</p>
+<p>輸入改用scanf就刷到rank 1了 (開心)
+        
+          <p class="article-more-link">
+            <a href="/posts/2015-08-23/tioj-1667/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://domen-blog.github.io/posts/2015-08-23/tioj-1667/" data-id="cjflzb0am001y7z3fffx7va0b" class="article-share-link">Share</a>
+      
+        <a href="https://domen-blog.github.io/posts/2015-08-23/tioj-1667/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bit/">BIT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tioj/">TIOJ</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-tioj-1206" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/posts/2015-08-21/tioj-1206/" class="article-date">
+  <time datetime="2015-08-20T16:00:00.000Z" itemprop="datePublished">2015-08-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/competitive-programming/">Competitive Programming</a>►<a class="article-category-link" href="/categories/competitive-programming/problems/">Problems</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/posts/2015-08-21/tioj-1206/">TIOJ 1206 - 尋找密碼字串</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Link: <a href="http://tioj.ck.tp.edu.tw/problems/1206" target="_blank" rel="noopener">http://tioj.ck.tp.edu.tw/problems/1206</a></p>
+<p>把題目給的字串反轉，做z value(z algorithm)即可<br>如果第i個字元(0-based)的z value( <code>z[i]</code> )&gt;=i 就代表那是一個可能的密碼，取最大值就是答案了</p>
+<p>複雜度: O(n)</p>
+        
+          <p class="article-more-link">
+            <a href="/posts/2015-08-21/tioj-1206/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://domen-blog.github.io/posts/2015-08-21/tioj-1206/" data-id="cjflzb0a0000y7z3fbbr16tbk" class="article-share-link">Share</a>
+      
+        <a href="https://domen-blog.github.io/posts/2015-08-21/tioj-1206/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tioj/">TIOJ</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+    </nav>
+  
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/algorithm/">Algorithm</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">Blog</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/competitive-programming/">Competitive Programming</a><span class="category-list-count">26</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/competitive-programming/introduction/">Introduction</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/competitive-programming/problems/">Problems</a><span class="category-list-count">24</span></li></ul></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/bit/">BIT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bst/">BST</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codeforces/">Codeforces</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dp/">DP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/google-code-jam/">Google Code Jam</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/graph/">Graph</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hoj/">HOJ</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ioi/">IOI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/poj/">POJ</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/segment-tree/">Segment Tree</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tioj/">TIOJ</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/toj/">TOJ</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/two-pointer/">Two Pointer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uva/">UVa</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xor/">XOR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zerojudge/">ZeroJudge</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/math/">math</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ntucsiec2016/">ntucsiec2016</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/樹壓平/">樹壓平</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/bit/" style="font-size: 15px;">BIT</a> <a href="/tags/bst/" style="font-size: 10px;">BST</a> <a href="/tags/codeforces/" style="font-size: 10px;">Codeforces</a> <a href="/tags/dp/" style="font-size: 10px;">DP</a> <a href="/tags/google-code-jam/" style="font-size: 10px;">Google Code Jam</a> <a href="/tags/graph/" style="font-size: 10px;">Graph</a> <a href="/tags/hoj/" style="font-size: 10px;">HOJ</a> <a href="/tags/ioi/" style="font-size: 10px;">IOI</a> <a href="/tags/poj/" style="font-size: 10px;">POJ</a> <a href="/tags/segment-tree/" style="font-size: 15px;">Segment Tree</a> <a href="/tags/tioj/" style="font-size: 20px;">TIOJ</a> <a href="/tags/toj/" style="font-size: 15px;">TOJ</a> <a href="/tags/two-pointer/" style="font-size: 10px;">Two Pointer</a> <a href="/tags/uva/" style="font-size: 15px;">UVa</a> <a href="/tags/xor/" style="font-size: 10px;">XOR</a> <a href="/tags/zerojudge/" style="font-size: 15px;">ZeroJudge</a> <a href="/tags/math/" style="font-size: 10px;">math</a> <a href="/tags/ntucsiec2016/" style="font-size: 10px;">ntucsiec2016</a> <a href="/tags/樹壓平/" style="font-size: 10px;">樹壓平</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/posts/2016-09-19/online-judge-multiple-input/">Online Judge 基礎觀念：多測資輸入不需把資料都讀入後再輸出</a>
+          </li>
+        
+          <li>
+            <a href="/posts/2016-04-14/uva-1569/">UVa 1569 - Multiple</a>
+          </li>
+        
+          <li>
+            <a href="/posts/2016-04-11/tioj-1272/">TIOJ 1272 - The Agency</a>
+          </li>
+        
+          <li>
+            <a href="/posts/2016-04-10/google-code-jam-introduction/">Google Code Jam 賽制介紹</a>
+          </li>
+        
+          <li>
+            <a href="/posts/2016-04-03/ioi-2014-game/">IOI 2014 - 猜謎遊戲(game), TIOJ 1896</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+  <h3 class="widget-title">Friends&#39; Blogs</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://codingsimplifylife.blogspot.tw/" target="_blank">code風景區</a>
+          </li>
+        
+          <li>
+            <a href="https://chino.taipei/" target="_blank">Chino&#39;s</a>
+          </li>
+        
+          <li>
+            <a href="http://codingbeans.blogspot.tw/" target="_blank">Coding Beans</a>
+          </li>
+        
+          <li>
+            <a href="https://lfswang.github.io/" target="_blank">LFsWang</a>
+          </li>
+        
+          <li>
+            <a href="http://scj-code.blogspot.tw/" target="_blank">程式競賽解題 (scj-code)</a>
+          </li>
+        
+          <li>
+            <a href="http://codingdream1373.blogspot.tw/" target="_blank">codingdream</a>
+          </li>
+        
+          <li>
+            <a href="https://johnchen902.github.io/blog/" target="_blank">johnchen902&#39;s Blog</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <div id="footer">
+  
+  <div id='foot-stars'></div>
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Domen Su<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</div>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About Me</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'domenblog';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

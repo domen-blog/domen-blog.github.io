@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>TIOJ 1318 - 奥步戰術 Tactic | Domen&#39;s Programming World</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Link: http://tioj.ck.tp.edu.tw/problems/1318 不錯的思考題，感覺滿有難度的，問人才會。不過測資似乎不太強，用gready假解就能喇到90分~AC。 TOJ上加強測資的版本: http://toj.tfcis.org/oj/pro/282/  題解">
+<meta name="keywords" content="TIOJ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TIOJ 1318 - 奥步戰術 Tactic">
+<meta property="og:url" content="https://domen-blog.github.io/posts/2015-11-26/tioj-1318/index.html">
+<meta property="og:site_name" content="Domen&#39;s Programming World">
+<meta property="og:description" content="Link: http://tioj.ck.tp.edu.tw/problems/1318 不錯的思考題，感覺滿有難度的，問人才會。不過測資似乎不太強，用gready假解就能喇到90分~AC。 TOJ上加強測資的版本: http://toj.tfcis.org/oj/pro/282/  題解">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-04-05T03:40:11.037Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TIOJ 1318 - 奥步戰術 Tactic">
+<meta name="twitter:description" content="Link: http://tioj.ck.tp.edu.tw/problems/1318 不錯的思考題，感覺滿有難度的，問人才會。不過測資似乎不太強，用gready假解就能喇到90分~AC。 TOJ上加強測資的版本: http://toj.tfcis.org/oj/pro/282/  題解">
+<link rel="publisher" href="https://plus.google.com/+%E8%98%87%E5%A4%9A%E9%96%80domen">
+  
+    <link rel="alternative" href="/atom.xml" title="Domen&#39;s Programming World" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-49513664-2', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div id="header">
+  <div id="banner">
+    <div id="cover"></div>
+    <div id="stars"></div>
+  </div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Domen&#39;s Programming World</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">domen111 @ TFcis 16</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About Me</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://domen-blog.github.io"></form>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="outer">
+        <section id="main"><article id="post-tioj-1318" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/posts/2015-11-26/tioj-1318/" class="article-date">
+  <time datetime="2015-11-25T16:00:00.000Z" itemprop="datePublished">2015-11-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/competitive-programming/">Competitive Programming</a>►<a class="article-category-link" href="/categories/competitive-programming/problems/">Problems</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      TIOJ 1318 - 奥步戰術 Tactic
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Link: <a href="http://tioj.ck.tp.edu.tw/problems/1318" target="_blank" rel="noopener">http://tioj.ck.tp.edu.tw/problems/1318</a></p>
+<p>不錯的思考題，感覺滿有難度的，問人才會。不過測資似乎不太強，用gready假解就能喇到90分~AC。</p>
+<p>TOJ上加強測資的版本: <a href="http://toj.tfcis.org/oj/pro/282/" target="_blank" rel="noopener">http://toj.tfcis.org/oj/pro/282/</a></p>
+<hr>
+<h1 id="題解"><a href="#題解" class="headerlink" title="題解"></a>題解</h1><a id="more"></a>
+<p>每個題目分為 <code>0分-&gt;部分</code> 和 <code>部分-&gt;AC</code><br>例如範測可改為:</p>
+<table>
+<thead>
+<tr>
+<th>0分-&gt;部分</th>
+<th>部分-&gt;AC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3</td>
+<td>1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>4</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2</td>
+</tr>
+<tr>
+<td>3</td>
+<td>1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<p>對於 <code>0分-&gt;部分</code> &gt; <code>部分-&gt;AC</code> 的題目我們稱為<code>高門檻題</code><br>對於 <code>0分-&gt;部分</code> &lt;= <code>部分-&gt;AC</code> 的題目我們稱為<code>低門檻題</code></p>
+<table>
+<thead>
+<tr>
+<th>門檻</th>
+<th>0分-&gt;部分</th>
+<th>部分-&gt;AC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>高</td>
+<td>3</td>
+<td>1</td>
+</tr>
+<tr>
+<td>高</td>
+<td>3</td>
+<td>2</td>
+</tr>
+<tr>
+<td>高</td>
+<td>3</td>
+<td>1</td>
+</tr>
+<tr>
+<td>低</td>
+<td>2</td>
+<td>4</td>
+</tr>
+<tr>
+<td>低</td>
+<td>2</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<p>對於全部都是低門檻題的狀況，我們只要把 <code>0分-&gt;部分</code> 和 <code>部分-&gt;AC</code> 拆開，直接由時間少的開始取即可。<br>對於全部都是高門檻題的狀況，有一個性質是至多只有一題會拿部分分數。</p>
+<p>至於有同時有高門檻題和低門檻題的情形呢? 我們可以枚舉要拿幾個高門檻題，剩下的時間留給低門檻題(二分搜低門檻題可用幾題)</p>
+<p>接下來我們遇到了另一個難題，要怎麼快速的枚舉如何拿高門檻題呢? 以下解決方式是自己想+和同學討論的，簡單敘述一下。<br>可以對高門檻題依據<code>0分-&gt;AC</code>的時間做排序，由小的開始拿，至於哪一題要拿部分分數，則從剩下未取的中選一個<code>0分-&gt;部分</code>時間最少的，或者從已拿取的中，選一個<code>部分-&gt;AC</code>時間最大的改為只拿部分分數。<br>這作法可透過暴力枚舉觀察一下來證明，不過懶得寫了XD</p>
+<hr>
+<h1 id="程式碼、除錯測資"><a href="#程式碼、除錯測資" class="headerlink" title="程式碼、除錯測資"></a>程式碼、除錯測資</h1><p>附上亂亂的code<br><figure class="highlight cpp"><figcaption><span>AC code</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; pii; <span class="comment">//first: partial-&gt;AC, second: 0-&gt;partial</span></span><br><span class="line"><span class="built_in">vector</span>&lt;pii&gt; high; <span class="comment">//高門檻題</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; low; <span class="comment">//低門檻題</span></span><br><span class="line"><span class="keyword">int</span> lowp[<span class="number">200010</span>];</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(pii a,pii b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a.first+a.second&lt;b.first+b.second;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ios::sync_with_stdio(<span class="number">0</span>);</span><br><span class="line">    <span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> n,t;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n&gt;&gt;t;</span><br><span class="line">    <span class="keyword">int</span> hc=<span class="number">0</span>,lc=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> h,c;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;h&gt;&gt;c;</span><br><span class="line">        h-=c;</span><br><span class="line">        <span class="keyword">if</span>(h&lt;c)</span><br><span class="line">        &#123;</span><br><span class="line">            high.push_back(&#123;h,c&#125;);</span><br><span class="line">            hc++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            low.push_back(h);</span><br><span class="line">            low.push_back(c);</span><br><span class="line">            lc+=<span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    sort(low.begin(),low.end());</span><br><span class="line">    sort(high.begin(),high.end(),cmp);</span><br><span class="line">    lowp[<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=lc;i++)</span><br><span class="line">        lowp[i]=lowp[i<span class="number">-1</span>]+low[i<span class="number">-1</span>];</span><br><span class="line">    <span class="keyword">int</span> st=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;hc;i++)</span><br><span class="line">        st+=high[i].first+high[i].second;</span><br><span class="line">    <span class="keyword">int</span> ans=<span class="number">0</span>,mnc=<span class="number">1000000000</span>;</span><br><span class="line">    <span class="built_in">multiset</span>&lt;<span class="keyword">int</span>&gt; mxc;</span><br><span class="line">    mxc.insert(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;hc;i++)</span><br><span class="line">        mxc.insert(high[i].first);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=hc<span class="number">-1</span>;i&gt;=<span class="number">-1</span>;i--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">auto</span> solv=[t,&amp;ans,lc](<span class="keyword">int</span> st,<span class="keyword">int</span> ic)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(st&lt;=t)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">int</span> tc=upper_bound(lowp,lowp+lc+<span class="number">1</span>,t-st)-lowp<span class="number">-1</span>;</span><br><span class="line">                ans=max(ans,ic+tc);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        solv(st,(i+<span class="number">1</span>)*<span class="number">2</span>);</span><br><span class="line">        solv(st+mnc,(i+<span class="number">1</span>)*<span class="number">2</span>+<span class="number">1</span>);</span><br><span class="line">        solv(st-*mxc.rbegin(),(i+<span class="number">1</span>)*<span class="number">2</span><span class="number">-1</span>);</span><br><span class="line">        <span class="keyword">if</span>(i&gt;=<span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            st-=high[i].first+high[i].second;</span><br><span class="line">            mnc=min(mnc,high[i].second);</span><br><span class="line">            mxc.erase(mxc.find(high[i].first));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>附贈幾筆很強的測資 (可能比官方測資強)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">2 6</span><br><span class="line">4 1</span><br><span class="line">5 3</span><br><span class="line"></span><br><span class="line">2 5</span><br><span class="line">10 2</span><br><span class="line">5 4</span><br><span class="line"></span><br><span class="line">2 6</span><br><span class="line">6 1</span><br><span class="line">9 6</span><br><span class="line"></span><br><span class="line">2 11</span><br><span class="line">6 4</span><br><span class="line">7 6</span><br><span class="line"></span><br><span class="line">3 23</span><br><span class="line">8 7</span><br><span class="line">11 9</span><br><span class="line">12 8</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://domen-blog.github.io/posts/2015-11-26/tioj-1318/" data-id="cjflzb0ab001f7z3fw3jjt69v" class="article-share-link">Share</a>
+      
+        <a href="https://domen-blog.github.io/posts/2015-11-26/tioj-1318/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tioj/">TIOJ</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/posts/2015-12-01/forum-post-moving/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          竹園論壇文章搬家
+        
+      </div>
+    </a>
+  
+  
+    <a href="/posts/2015-11-25/zerojudge-b542/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">ZeroJudge b542 - 聽到這兩個人的身高，讓十萬人都驚呆了</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/algorithm/">Algorithm</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">Blog</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/competitive-programming/">Competitive Programming</a><span class="category-list-count">26</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/competitive-programming/introduction/">Introduction</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/competitive-programming/problems/">Problems</a><span class="category-list-count">24</span></li></ul></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/bit/">BIT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bst/">BST</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codeforces/">Codeforces</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dp/">DP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/google-code-jam/">Google Code Jam</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/graph/">Graph</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hoj/">HOJ</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ioi/">IOI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/poj/">POJ</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/segment-tree/">Segment Tree</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tioj/">TIOJ</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/toj/">TOJ</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/two-pointer/">Two Pointer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uva/">UVa</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xor/">XOR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zerojudge/">ZeroJudge</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/math/">math</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ntucsiec2016/">ntucsiec2016</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/樹壓平/">樹壓平</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/bit/" style="font-size: 15px;">BIT</a> <a href="/tags/bst/" style="font-size: 10px;">BST</a> <a href="/tags/codeforces/" style="font-size: 10px;">Codeforces</a> <a href="/tags/dp/" style="font-size: 10px;">DP</a> <a href="/tags/google-code-jam/" style="font-size: 10px;">Google Code Jam</a> <a href="/tags/graph/" style="font-size: 10px;">Graph</a> <a href="/tags/hoj/" style="font-size: 10px;">HOJ</a> <a href="/tags/ioi/" style="font-size: 10px;">IOI</a> <a href="/tags/poj/" style="font-size: 10px;">POJ</a> <a href="/tags/segment-tree/" style="font-size: 15px;">Segment Tree</a> <a href="/tags/tioj/" style="font-size: 20px;">TIOJ</a> <a href="/tags/toj/" style="font-size: 15px;">TOJ</a> <a href="/tags/two-pointer/" style="font-size: 10px;">Two Pointer</a> <a href="/tags/uva/" style="font-size: 15px;">UVa</a> <a href="/tags/xor/" style="font-size: 10px;">XOR</a> <a href="/tags/zerojudge/" style="font-size: 15px;">ZeroJudge</a> <a href="/tags/math/" style="font-size: 10px;">math</a> <a href="/tags/ntucsiec2016/" style="font-size: 10px;">ntucsiec2016</a> <a href="/tags/樹壓平/" style="font-size: 10px;">樹壓平</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/posts/2016-09-19/online-judge-multiple-input/">Online Judge 基礎觀念：多測資輸入不需把資料都讀入後再輸出</a>
+          </li>
+        
+          <li>
+            <a href="/posts/2016-04-14/uva-1569/">UVa 1569 - Multiple</a>
+          </li>
+        
+          <li>
+            <a href="/posts/2016-04-11/tioj-1272/">TIOJ 1272 - The Agency</a>
+          </li>
+        
+          <li>
+            <a href="/posts/2016-04-10/google-code-jam-introduction/">Google Code Jam 賽制介紹</a>
+          </li>
+        
+          <li>
+            <a href="/posts/2016-04-03/ioi-2014-game/">IOI 2014 - 猜謎遊戲(game), TIOJ 1896</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+  <h3 class="widget-title">Friends&#39; Blogs</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://codingsimplifylife.blogspot.tw/" target="_blank">code風景區</a>
+          </li>
+        
+          <li>
+            <a href="https://chino.taipei/" target="_blank">Chino&#39;s</a>
+          </li>
+        
+          <li>
+            <a href="http://codingbeans.blogspot.tw/" target="_blank">Coding Beans</a>
+          </li>
+        
+          <li>
+            <a href="https://lfswang.github.io/" target="_blank">LFsWang</a>
+          </li>
+        
+          <li>
+            <a href="http://scj-code.blogspot.tw/" target="_blank">程式競賽解題 (scj-code)</a>
+          </li>
+        
+          <li>
+            <a href="http://codingdream1373.blogspot.tw/" target="_blank">codingdream</a>
+          </li>
+        
+          <li>
+            <a href="https://johnchen902.github.io/blog/" target="_blank">johnchen902&#39;s Blog</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <div id="footer">
+  
+  <div id='foot-stars'></div>
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Domen Su<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</div>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About Me</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'domenblog';
+  
+  var disqus_url = 'https://domen-blog.github.io/posts/2015-11-26/tioj-1318/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>UVa 1569 - Multiple | Domen&#39;s Programming World</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Link: https://uva.onlinejudge.org/index.php?option=com_onlinejudge&amp;amp;Itemid=8&amp;amp;page=show_problem&amp;amp;problem=4351 自己想不出這題，網路上題解也不多，後來研究了這篇的code才知道怎麼寫。 解法想個暴利的解法，把題目給定的M個數字排序後，用這些數字去組合，BFS搜索下去(必須用">
+<meta name="keywords" content="UVa">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UVa 1569 - Multiple">
+<meta property="og:url" content="https://domen-blog.github.io/posts/2016-04-14/uva-1569/index.html">
+<meta property="og:site_name" content="Domen&#39;s Programming World">
+<meta property="og:description" content="Link: https://uva.onlinejudge.org/index.php?option=com_onlinejudge&amp;amp;Itemid=8&amp;amp;page=show_problem&amp;amp;problem=4351 自己想不出這題，網路上題解也不多，後來研究了這篇的code才知道怎麼寫。 解法想個暴利的解法，把題目給定的M個數字排序後，用這些數字去組合，BFS搜索下去(必須用">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-04-05T03:40:11.042Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="UVa 1569 - Multiple">
+<meta name="twitter:description" content="Link: https://uva.onlinejudge.org/index.php?option=com_onlinejudge&amp;amp;Itemid=8&amp;amp;page=show_problem&amp;amp;problem=4351 自己想不出這題，網路上題解也不多，後來研究了這篇的code才知道怎麼寫。 解法想個暴利的解法，把題目給定的M個數字排序後，用這些數字去組合，BFS搜索下去(必須用">
+<link rel="publisher" href="https://plus.google.com/+%E8%98%87%E5%A4%9A%E9%96%80domen">
+  
+    <link rel="alternative" href="/atom.xml" title="Domen&#39;s Programming World" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-49513664-2', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div id="header">
+  <div id="banner">
+    <div id="cover"></div>
+    <div id="stars"></div>
+  </div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Domen&#39;s Programming World</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">domen111 @ TFcis 16</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About Me</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://domen-blog.github.io"></form>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="outer">
+        <section id="main"><article id="post-uva-1569" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/posts/2016-04-14/uva-1569/" class="article-date">
+  <time datetime="2016-04-14T11:05:00.000Z" itemprop="datePublished">2016-04-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/competitive-programming/">Competitive Programming</a>►<a class="article-category-link" href="/categories/competitive-programming/problems/">Problems</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      UVa 1569 - Multiple
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Link: <a href="https://uva.onlinejudge.org/index.php?option=com_onlinejudge&amp;Itemid=8&amp;page=show_problem&amp;problem=4351" target="_blank" rel="noopener">https://uva.onlinejudge.org/index.php?option=com_onlinejudge&amp;Itemid=8&amp;page=show_problem&amp;problem=4351</a></p>
+<p>自己想不出這題，網路上題解也不多，後來研究了<a href="http://blog.csdn.net/keshuai19940722/article/details/49520841" target="_blank" rel="noopener">這篇</a>的code才知道怎麼寫。</p>
+<h4 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h4><p>想個暴利的解法，把題目給定的M個數字排序後，用這些數字去組合，BFS搜索下去(必須用BFS去搜索才會優先找到較小的數字)，搜索的過程一邊模N就能判斷最後是不是N的倍數(搜索完成)。<br>不過這樣的作法複雜度是指數級別的，而且沒辦法判斷是不是找不到答案(需輸出0)。</p>
+<p>接著我們可以發現一件事，假設某兩個狀態模N後是一樣的，則由他們到答案的路徑也是一樣的，所以他們之間較晚搜索到的數字可以直接忽略，因此狀態只剩下N種，紀錄一下哪個模數出現過即可。<a id="more"></a></p>
+<p>狀態只剩下N種，在這幾種狀態中做BFS，複雜度O(N)。</p>
+<figure class="highlight cpp"><figcaption><span>AC code</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; x;</span><br><span class="line"><span class="keyword">bool</span> u[<span class="number">5010</span>];</span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">solve</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(n==<span class="number">0</span>) <span class="keyword">return</span> <span class="string">"0"</span>;</span><br><span class="line">	<span class="built_in">memset</span>(u,<span class="number">0</span>,<span class="keyword">sizeof</span> u);</span><br><span class="line">	<span class="built_in">queue</span>&lt;pair&lt;<span class="built_in">string</span>,<span class="keyword">int</span>&gt;&gt; q; <span class="comment">//first: value, second: remainder</span></span><br><span class="line">	q.push(&#123;<span class="string">""</span>,<span class="number">0</span>&#125;);</span><br><span class="line">	<span class="keyword">while</span>(q.size())</span><br><span class="line">	&#123;</span><br><span class="line">		pair&lt;<span class="built_in">string</span>,<span class="keyword">int</span>&gt; now=q.front(); q.pop();</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i:x)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(i==<span class="number">0</span>&amp;&amp;now.first==<span class="string">""</span>) <span class="keyword">continue</span>;</span><br><span class="line">			<span class="built_in">string</span> s=now.first+<span class="keyword">char</span>(i+<span class="string">'0'</span>);</span><br><span class="line">			<span class="keyword">int</span> r=(now.second*<span class="number">10</span>+i)%n;</span><br><span class="line">			<span class="keyword">if</span>(r==<span class="number">0</span>) <span class="keyword">return</span> s;</span><br><span class="line">			<span class="keyword">if</span>(!u[r])</span><br><span class="line">			&#123;</span><br><span class="line">				u[r]=<span class="number">1</span>;</span><br><span class="line">				q.push(&#123;s,r&#125;);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="string">"0"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> m;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m)</span><br><span class="line">	&#123;</span><br><span class="line">		x.resize(m);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++)</span><br><span class="line">			<span class="built_in">cin</span>&gt;&gt;x[i];</span><br><span class="line">		sort(x.begin(), x.end());</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;solve()&lt;&lt;<span class="string">'\n'</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://domen-blog.github.io/posts/2016-04-14/uva-1569/" data-id="cjflzb0au002f7z3fpl1cgo2l" class="article-share-link">Share</a>
+      
+        <a href="https://domen-blog.github.io/posts/2016-04-14/uva-1569/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/uva/">UVa</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/posts/2016-09-19/online-judge-multiple-input/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Online Judge 基礎觀念：多測資輸入不需把資料都讀入後再輸出
+        
+      </div>
+    </a>
+  
+  
+    <a href="/posts/2016-04-11/tioj-1272/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">TIOJ 1272 - The Agency</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/algorithm/">Algorithm</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">Blog</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/competitive-programming/">Competitive Programming</a><span class="category-list-count">26</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/competitive-programming/introduction/">Introduction</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/competitive-programming/problems/">Problems</a><span class="category-list-count">24</span></li></ul></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/bit/">BIT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bst/">BST</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codeforces/">Codeforces</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dp/">DP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/google-code-jam/">Google Code Jam</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/graph/">Graph</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hoj/">HOJ</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ioi/">IOI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/poj/">POJ</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/segment-tree/">Segment Tree</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tioj/">TIOJ</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/toj/">TOJ</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/two-pointer/">Two Pointer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uva/">UVa</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xor/">XOR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zerojudge/">ZeroJudge</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/math/">math</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ntucsiec2016/">ntucsiec2016</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/樹壓平/">樹壓平</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/bit/" style="font-size: 15px;">BIT</a> <a href="/tags/bst/" style="font-size: 10px;">BST</a> <a href="/tags/codeforces/" style="font-size: 10px;">Codeforces</a> <a href="/tags/dp/" style="font-size: 10px;">DP</a> <a href="/tags/google-code-jam/" style="font-size: 10px;">Google Code Jam</a> <a href="/tags/graph/" style="font-size: 10px;">Graph</a> <a href="/tags/hoj/" style="font-size: 10px;">HOJ</a> <a href="/tags/ioi/" style="font-size: 10px;">IOI</a> <a href="/tags/poj/" style="font-size: 10px;">POJ</a> <a href="/tags/segment-tree/" style="font-size: 15px;">Segment Tree</a> <a href="/tags/tioj/" style="font-size: 20px;">TIOJ</a> <a href="/tags/toj/" style="font-size: 15px;">TOJ</a> <a href="/tags/two-pointer/" style="font-size: 10px;">Two Pointer</a> <a href="/tags/uva/" style="font-size: 15px;">UVa</a> <a href="/tags/xor/" style="font-size: 10px;">XOR</a> <a href="/tags/zerojudge/" style="font-size: 15px;">ZeroJudge</a> <a href="/tags/math/" style="font-size: 10px;">math</a> <a href="/tags/ntucsiec2016/" style="font-size: 10px;">ntucsiec2016</a> <a href="/tags/樹壓平/" style="font-size: 10px;">樹壓平</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/posts/2016-09-19/online-judge-multiple-input/">Online Judge 基礎觀念：多測資輸入不需把資料都讀入後再輸出</a>
+          </li>
+        
+          <li>
+            <a href="/posts/2016-04-14/uva-1569/">UVa 1569 - Multiple</a>
+          </li>
+        
+          <li>
+            <a href="/posts/2016-04-11/tioj-1272/">TIOJ 1272 - The Agency</a>
+          </li>
+        
+          <li>
+            <a href="/posts/2016-04-10/google-code-jam-introduction/">Google Code Jam 賽制介紹</a>
+          </li>
+        
+          <li>
+            <a href="/posts/2016-04-03/ioi-2014-game/">IOI 2014 - 猜謎遊戲(game), TIOJ 1896</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+  <h3 class="widget-title">Friends&#39; Blogs</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://codingsimplifylife.blogspot.tw/" target="_blank">code風景區</a>
+          </li>
+        
+          <li>
+            <a href="https://chino.taipei/" target="_blank">Chino&#39;s</a>
+          </li>
+        
+          <li>
+            <a href="http://codingbeans.blogspot.tw/" target="_blank">Coding Beans</a>
+          </li>
+        
+          <li>
+            <a href="https://lfswang.github.io/" target="_blank">LFsWang</a>
+          </li>
+        
+          <li>
+            <a href="http://scj-code.blogspot.tw/" target="_blank">程式競賽解題 (scj-code)</a>
+          </li>
+        
+          <li>
+            <a href="http://codingdream1373.blogspot.tw/" target="_blank">codingdream</a>
+          </li>
+        
+          <li>
+            <a href="https://johnchen902.github.io/blog/" target="_blank">johnchen902&#39;s Blog</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <div id="footer">
+  
+  <div id='foot-stars'></div>
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Domen Su<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</div>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About Me</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'domenblog';
+  
+  var disqus_url = 'https://domen-blog.github.io/posts/2016-04-14/uva-1569/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
