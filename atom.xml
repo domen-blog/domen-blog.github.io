@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://domen-blog.github.io/"/>
-  <updated>2019-05-07T09:21:30.299Z</updated>
+  <updated>2019-05-07T09:25:18.108Z</updated>
   <id>https://domen-blog.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://domen-blog.github.io/posts/2019-05-05/keras-embedding/"/>
     <id>https://domen-blog.github.io/posts/2019-05-05/keras-embedding/</id>
     <published>2019-05-05T08:25:57.000Z</published>
-    <updated>2019-05-07T09:21:30.299Z</updated>
+    <updated>2019-05-07T09:25:18.108Z</updated>
     
     <content type="html"><![CDATA[<p>在使用 RNN (Recurrent Neural Network) 做文字相關的處理時，我們可以利用 gensim 的 Word2Vec 將一個詞彙轉成一個向量表達。</p><p>一個簡單的作法是，將 training data 和 testing data 資料裡的那些詞彙以對應的向量取代，然而這樣會很佔記憶體，以我目前的作業為例（2019 李宏毅 機器學習 作業6，這次作業資料是不公開的），training data + testing data 約 20 MB 但經過 Word2Vec 的轉換後就變成超過 10 GB 了，不僅執行速度慢，甚至電腦上根本不會有那麼多的記憶體。</p><p>為了避免這個問題，我們會將 Word2Vec 中的詞彙做個編號(index)，接著將 training / testing data 中的資料以這個編號取代，在 keras 上訓練時，我們則需要將 index 到 vector 的對應傳入（<code>w2v_model.wv.vectors</code>提供了這個對應，以下稱之<code>index2vec</code>）。</p><p>用法範例: <a href="https://gist.github.com/domen111/64cb6628cd57c2ffa4f91024ba6190ae" target="_blank" rel="noopener">https://gist.github.com/domen111/64cb6628cd57c2ffa4f91024ba6190ae</a></p><p>接著在 keras 上需要利用 <code>keras.layers.Embedding</code>來把<code>index2vec</code>傳入，<code>keras.layers.Embedding</code>參數如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keras.layers.Embedding(input_dim, output_dim, embeddings_initializer=<span class="string">'uniform'</span>, embeddings_regularizer=<span class="keyword">None</span>, activity_regularizer=<span class="keyword">None</span>, embeddings_constraint=<span class="keyword">None</span>, mask_zero=<span class="keyword">False</span>, input_length=<span class="keyword">None</span>)</span><br></pre></td></tr></table></figure></p><p>在 model 的第一層加入：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model.add(Embedding(index2vec.shape[<span class="number">0</span>], index2vec.shape[<span class="number">1</span>], weights=[index2vec], trainable=<span class="keyword">False</span>))</span><br></pre></td></tr></table></figure></p><p><code>weights</code>指定要把每個詞彙 Embedding 成什麼，也就是我們的 <code>index2vec</code> 表格，<code>input_dim</code>指定字典的大小，<code>output_dim</code>指定向量的長度。</p>]]></content>
     
@@ -37,6 +37,12 @@
     
       <category term="Machine Learning" scheme="https://domen-blog.github.io/categories/machine-learning/"/>
     
+    
+      <category term="RNN" scheme="https://domen-blog.github.io/tags/rnn/"/>
+    
+      <category term="Keras" scheme="https://domen-blog.github.io/tags/keras/"/>
+    
+      <category term="Embedding" scheme="https://domen-blog.github.io/tags/embedding/"/>
     
   </entry>
   
