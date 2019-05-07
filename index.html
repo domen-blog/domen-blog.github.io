@@ -84,6 +84,55 @@ ga('send', 'pageview');
       <div class="outer">
         <section id="main">
   
+    <article id="post-keras-embedding" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/posts/2019-05-05/keras-embedding/" class="article-date">
+  <time datetime="2019-05-05T08:25:57.000Z" itemprop="datePublished">2019-05-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/machine-learning/">Machine Learning</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/posts/2019-05-05/keras-embedding/">Keras Embedding Layer 搭配 gensim Word2Vec 用法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在使用 RNN (Recurrent Neural Network) 做文字相關的處理時，我們可以利用 gensim 的 Word2Vec 將一個詞彙轉成一個向量表達。</p>
+<p>一個簡單的作法是，將 training data 和 testing data 資料裡的那些詞彙以對應的向量取代，然而這樣會很佔記憶體，以我目前的作業為例（2019 李宏毅 機器學習 作業6，這次作業資料是不公開的），training data + testing data 約 20 MB 但經過 Word2Vec 的轉換後就變成超過 10 GB 了，不僅執行速度慢，甚至電腦上根本不會有那麼多的記憶體。</p>
+<p>為了避免這個問題，我們會將 Word2Vec 中的詞彙做個編號(index)，接著將 training / testing data 中的資料以這個編號取代，在 keras 上訓練時，我們則需要將 index 到 vector 的對應傳入（<code>w2v_model.wv.vectors</code>提供了這個對應，以下稱之<code>index2vec</code>）。</p>
+<p>用法範例: <a href="https://gist.github.com/domen111/64cb6628cd57c2ffa4f91024ba6190ae" target="_blank" rel="noopener">https://gist.github.com/domen111/64cb6628cd57c2ffa4f91024ba6190ae</a></p>
+<p>接著在 keras 上需要利用 <code>keras.layers.Embedding</code>來把<code>index2vec</code>傳入，<code>keras.layers.Embedding</code>參數如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keras.layers.Embedding(input_dim, output_dim, embeddings_initializer=<span class="string">'uniform'</span>, embeddings_regularizer=<span class="keyword">None</span>, activity_regularizer=<span class="keyword">None</span>, embeddings_constraint=<span class="keyword">None</span>, mask_zero=<span class="keyword">False</span>, input_length=<span class="keyword">None</span>)</span><br></pre></td></tr></table></figure></p>
+<p>在 model 的第一層加入：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model.add(Embedding(index2vec.shape[<span class="number">0</span>], index2vec.shape[<span class="number">1</span>], weights=[index2vec], trainable=<span class="keyword">False</span>))</span><br></pre></td></tr></table></figure></p>
+<p><code>weights</code>指定要把每個詞彙 Embedding 成什麼，也就是我們的 <code>index2vec</code> 表格，<code>input_dim</code>指定字典的大小，<code>output_dim</code>指定向量的長度。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://domen-blog.github.io/posts/2019-05-05/keras-embedding/" data-id="cjvdl5u3z000qzd2js965cfhn" class="article-share-link">Share</a>
+      
+        <a href="https://domen-blog.github.io/posts/2019-05-05/keras-embedding/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-online-judge-multiple-input" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/posts/2016-09-19/online-judge-multiple-input/" class="article-date">
@@ -127,7 +176,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://domen-blog.github.io/posts/2016-09-19/online-judge-multiple-input/" data-id="cjflzj8o6000sg33f9kah84pc" class="article-share-link">Share</a>
+      <a data-url="https://domen-blog.github.io/posts/2016-09-19/online-judge-multiple-input/" data-id="cjvdl5u44000tzd2jtq2s8y3w" class="article-share-link">Share</a>
       
         <a href="https://domen-blog.github.io/posts/2016-09-19/online-judge-multiple-input/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -179,7 +228,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://domen-blog.github.io/posts/2016-04-14/uva-1569/" data-id="cjflzj8pn002gg33flip0z1z3" class="article-share-link">Share</a>
+      <a data-url="https://domen-blog.github.io/posts/2016-04-14/uva-1569/" data-id="cjvdl5u5d002hzd2jfec2zkmy" class="article-share-link">Share</a>
       
         <a href="https://domen-blog.github.io/posts/2016-04-14/uva-1569/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -230,7 +279,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://domen-blog.github.io/posts/2016-04-11/tioj-1272/" data-id="cjflzj8ol0018g33f723hwpq8" class="article-share-link">Share</a>
+      <a data-url="https://domen-blog.github.io/posts/2016-04-11/tioj-1272/" data-id="cjvdl5u4g001czd2jfr2jp4py" class="article-share-link">Share</a>
       
         <a href="https://domen-blog.github.io/posts/2016-04-11/tioj-1272/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -279,7 +328,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://domen-blog.github.io/posts/2016-04-10/google-code-jam-introduction/" data-id="cjflzj8nt000gg33f2aagbfb2" class="article-share-link">Share</a>
+      <a data-url="https://domen-blog.github.io/posts/2016-04-10/google-code-jam-introduction/" data-id="cjvdl5u3t000hzd2jbpjkpo62" class="article-share-link">Share</a>
       
         <a href="https://domen-blog.github.io/posts/2016-04-10/google-code-jam-introduction/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -336,7 +385,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://domen-blog.github.io/posts/2016-04-03/ioi-2014-game/" data-id="cjflzj8o1000ng33f6daqfcl5" class="article-share-link">Share</a>
+      <a data-url="https://domen-blog.github.io/posts/2016-04-03/ioi-2014-game/" data-id="cjvdl5u3x000ozd2jd2jekecj" class="article-share-link">Share</a>
       
         <a href="https://domen-blog.github.io/posts/2016-04-03/ioi-2014-game/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -386,7 +435,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://domen-blog.github.io/posts/2016-03-31/move-to-hexo/" data-id="cjflzj8o3000pg33f3kwrn8a3" class="article-share-link">Share</a>
+      <a data-url="https://domen-blog.github.io/posts/2016-03-31/move-to-hexo/" data-id="cjvdl5u480010zd2jivsydwii" class="article-share-link">Share</a>
       
         <a href="https://domen-blog.github.io/posts/2016-03-31/move-to-hexo/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -431,7 +480,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://domen-blog.github.io/posts/2015-12-01/forum-post-moving/" data-id="cjflzj8nr000eg33foxxljfb3" class="article-share-link">Share</a>
+      <a data-url="https://domen-blog.github.io/posts/2015-12-01/forum-post-moving/" data-id="cjvdl5u3r000ezd2jkvjpmqjf" class="article-share-link">Share</a>
       
         <a href="https://domen-blog.github.io/posts/2015-12-01/forum-post-moving/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -482,7 +531,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://domen-blog.github.io/posts/2015-11-26/tioj-1318/" data-id="cjflzj8os001ig33f875nfpr4" class="article-share-link">Share</a>
+      <a data-url="https://domen-blog.github.io/posts/2015-11-26/tioj-1318/" data-id="cjvdl5u4p001mzd2j0dvxzkel" class="article-share-link">Share</a>
       
         <a href="https://domen-blog.github.io/posts/2015-11-26/tioj-1318/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -532,62 +581,12 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://domen-blog.github.io/posts/2015-11-25/zerojudge-b542/" data-id="cjflzj8pp002kg33f015w8e9c" class="article-share-link">Share</a>
+      <a data-url="https://domen-blog.github.io/posts/2015-11-25/zerojudge-b542/" data-id="cjvdl5u5f002lzd2jd7gx609d" class="article-share-link">Share</a>
       
         <a href="https://domen-blog.github.io/posts/2015-11-25/zerojudge-b542/#disqus_thread" class="article-comment-link">Comments</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/two-pointer/">Two Pointer</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/zerojudge/">ZeroJudge</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-tioj-1332" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/posts/2015-11-08/tioj-1332/" class="article-date">
-  <time datetime="2015-11-07T16:00:00.000Z" itemprop="datePublished">2015-11-08</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/competitive-programming/">Competitive Programming</a>►<a class="article-category-link" href="/categories/competitive-programming/problems/">Problems</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/posts/2015-11-08/tioj-1332/">TIOJ 1332 - 名義老爸</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Link: <a href="http://tioj.ck.tp.edu.tw/problems/1332" target="_blank" rel="noopener">http://tioj.ck.tp.edu.tw/problems/1332</a></p>
-<p>用map(也可用set包pair)隨便亂寫AC，插入的時候用map找比它大和比它小的兩數分別是誰，誰比較晚插入誰就是它的爸爸。<br>複雜度O(nlgn)，據說正解是用笛卡爾樹O(n)，參考:<br><a href="http://ckhs1328.pixnet.net/blog/post/40525136-tioj-1332-%E5%90%8D%E7%BE%A9%E8%80%81%E7%88%B8" target="_blank" rel="noopener">http://ckhs1328.pixnet.net/blog/post/40525136-tioj-1332-%E5%90%8D%E7%BE%A9%E8%80%81%E7%88%B8</a><br><a href="http://cbdcoding.blogspot.tw/2015/03/tioj-1332.html" target="_blank" rel="noopener">http://cbdcoding.blogspot.tw/2015/03/tioj-1332.html</a><br>
-        
-          <p class="article-more-link">
-            <a href="/posts/2015-11-08/tioj-1332/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://domen-blog.github.io/posts/2015-11-08/tioj-1332/" data-id="cjflzj8ow001lg33ffjkhugop" class="article-share-link">Share</a>
-      
-        <a href="https://domen-blog.github.io/posts/2015-11-08/tioj-1332/#disqus_thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tioj/">TIOJ</a></li></ul>
 
     </footer>
   </div>
@@ -609,7 +608,7 @@ ga('send', 'pageview');
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/algorithm/">Algorithm</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">Blog</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/competitive-programming/">Competitive Programming</a><span class="category-list-count">26</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/competitive-programming/introduction/">Introduction</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/competitive-programming/problems/">Problems</a><span class="category-list-count">24</span></li></ul></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/algorithm/">Algorithm</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">Blog</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/competitive-programming/">Competitive Programming</a><span class="category-list-count">26</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/competitive-programming/introduction/">Introduction</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/competitive-programming/problems/">Problems</a><span class="category-list-count">24</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/machine-learning/">Machine Learning</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -636,7 +635,7 @@ ga('send', 'pageview');
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li></ul>
     </div>
   </div>
 
@@ -646,6 +645,10 @@ ga('send', 'pageview');
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/posts/2019-05-05/keras-embedding/">Keras Embedding Layer 搭配 gensim Word2Vec 用法</a>
+          </li>
         
           <li>
             <a href="/posts/2016-09-19/online-judge-multiple-input/">Online Judge 基礎觀念：多測資輸入不需把資料都讀入後再輸出</a>
@@ -661,10 +664,6 @@ ga('send', 'pageview');
         
           <li>
             <a href="/posts/2016-04-10/google-code-jam-introduction/">Google Code Jam 賽制介紹</a>
-          </li>
-        
-          <li>
-            <a href="/posts/2016-04-03/ioi-2014-game/">IOI 2014 - 猜謎遊戲(game), TIOJ 1896</a>
           </li>
         
       </ul>
@@ -719,7 +718,7 @@ ga('send', 'pageview');
   <div id='foot-stars'></div>
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2018 Domen Su<br>
+      &copy; 2019 Domen Su<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

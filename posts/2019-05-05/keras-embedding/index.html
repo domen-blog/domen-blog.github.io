@@ -3,20 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>POJ 1456 - Supermarket | Domen&#39;s Programming World</title>
+  <title>Keras Embedding Layer 搭配 gensim Word2Vec 用法 | Domen&#39;s Programming World</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Link: http://poj.org/problem?id=1456 把物品丟到時間軸上，反過來做就變成水題了，用priority_queue即可滿有趣的一題，關鍵在於能不能想到把時間反轉解決">
-<meta name="keywords" content="POJ">
+  <meta name="description" content="在使用 RNN (Recurrent Neural Network) 做文字相關的處理時，我們可以利用 gensim 的 Word2Vec 將一個詞彙轉成一個向量表達。 一個簡單的作法是，將 training data 和 testing data 資料裡的那些詞彙以對應的向量取代，然而這樣會很佔記憶體，以我目前的作業為例（2019 李宏毅 機器學習 作業6，這次作業資料是不公開的），traini">
 <meta property="og:type" content="article">
-<meta property="og:title" content="POJ 1456 - Supermarket">
-<meta property="og:url" content="https://domen-blog.github.io/posts/2015-09-15/poj-1456/index.html">
+<meta property="og:title" content="Keras Embedding Layer 搭配 gensim Word2Vec 用法">
+<meta property="og:url" content="https://domen-blog.github.io/posts/2019-05-05/keras-embedding/index.html">
 <meta property="og:site_name" content="Domen&#39;s Programming World">
-<meta property="og:description" content="Link: http://poj.org/problem?id=1456 把物品丟到時間軸上，反過來做就變成水題了，用priority_queue即可滿有趣的一題，關鍵在於能不能想到把時間反轉解決">
+<meta property="og:description" content="在使用 RNN (Recurrent Neural Network) 做文字相關的處理時，我們可以利用 gensim 的 Word2Vec 將一個詞彙轉成一個向量表達。 一個簡單的作法是，將 training data 和 testing data 資料裡的那些詞彙以對應的向量取代，然而這樣會很佔記憶體，以我目前的作業為例（2019 李宏毅 機器學習 作業6，這次作業資料是不公開的），traini">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-04-05T03:40:11.000Z">
+<meta property="og:updated_time" content="2019-05-07T09:21:30.299Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="POJ 1456 - Supermarket">
-<meta name="twitter:description" content="Link: http://poj.org/problem?id=1456 把物品丟到時間軸上，反過來做就變成水題了，用priority_queue即可滿有趣的一題，關鍵在於能不能想到把時間反轉解決">
+<meta name="twitter:title" content="Keras Embedding Layer 搭配 gensim Word2Vec 用法">
+<meta name="twitter:description" content="在使用 RNN (Recurrent Neural Network) 做文字相關的處理時，我們可以利用 gensim 的 Word2Vec 將一個詞彙轉成一個向量表達。 一個簡單的作法是，將 training data 和 testing data 資料裡的那些詞彙以對應的向量取代，然而這樣會很佔記憶體，以我目前的作業為例（2019 李宏毅 機器學習 作業6，這次作業資料是不公開的），traini">
 <link rel="publisher" href="https://plus.google.com/+%E8%98%87%E5%A4%9A%E9%96%80domen">
   
     <link rel="alternative" href="/atom.xml" title="Domen&#39;s Programming World" type="application/atom+xml">
@@ -87,14 +86,14 @@ ga('send', 'pageview');
   </div>
 </div>
       <div class="outer">
-        <section id="main"><article id="post-poj-1456" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-keras-embedding" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/posts/2015-09-15/poj-1456/" class="article-date">
-  <time datetime="2015-09-14T16:00:00.000Z" itemprop="datePublished">2015-09-15</time>
+    <a href="/posts/2019-05-05/keras-embedding/" class="article-date">
+  <time datetime="2019-05-05T08:25:57.000Z" itemprop="datePublished">2019-05-05</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/competitive-programming/">Competitive Programming</a>►<a class="article-category-link" href="/categories/competitive-programming/problems/">Problems</a>
+    <a class="article-category-link" href="/categories/machine-learning/">Machine Learning</a>
   </div>
 
   </div>
@@ -105,7 +104,7 @@ ga('send', 'pageview');
         
   
     <h1 class="article-title" itemprop="name">
-      POJ 1456 - Supermarket
+      Keras Embedding Layer 搭配 gensim Word2Vec 用法
     </h1>
   
 
@@ -113,38 +112,32 @@ ga('send', 'pageview');
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Link: <a href="http://poj.org/problem?id=1456" target="_blank" rel="noopener">http://poj.org/problem?id=1456</a></p>
-<p>把物品丟到時間軸上，反過來做就變成水題了，用priority_queue即可<br>滿有趣的一題，關鍵在於能不能想到把時間反轉解決<br><a id="more"></a><br><figure class="highlight cpp"><figcaption><span>AC code</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; a[<span class="number">10010</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ios::sync_with_stdio(<span class="number">0</span>);</span><br><span class="line">    <span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">10000</span>;i++)</span><br><span class="line">            a[i].clear();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> p,q;</span><br><span class="line">            <span class="built_in">cin</span>&gt;&gt;p&gt;&gt;q;</span><br><span class="line">            a[q].push_back(p);</span><br><span class="line">        &#125;</span><br><span class="line">        priority_queue&lt;<span class="keyword">int</span>&gt; pq;</span><br><span class="line">        <span class="keyword">int</span> ans=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">10000</span>;i&gt;=<span class="number">1</span>;i--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;a[i].size();j++)</span><br><span class="line">                pq.push(a[i][j]);</span><br><span class="line">            <span class="keyword">if</span>(pq.size())</span><br><span class="line">                ans+=pq.top(), pq.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="string">'\n'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        <p>在使用 RNN (Recurrent Neural Network) 做文字相關的處理時，我們可以利用 gensim 的 Word2Vec 將一個詞彙轉成一個向量表達。</p>
+<p>一個簡單的作法是，將 training data 和 testing data 資料裡的那些詞彙以對應的向量取代，然而這樣會很佔記憶體，以我目前的作業為例（2019 李宏毅 機器學習 作業6，這次作業資料是不公開的），training data + testing data 約 20 MB 但經過 Word2Vec 的轉換後就變成超過 10 GB 了，不僅執行速度慢，甚至電腦上根本不會有那麼多的記憶體。</p>
+<p>為了避免這個問題，我們會將 Word2Vec 中的詞彙做個編號(index)，接著將 training / testing data 中的資料以這個編號取代，在 keras 上訓練時，我們則需要將 index 到 vector 的對應傳入（<code>w2v_model.wv.vectors</code>提供了這個對應，以下稱之<code>index2vec</code>）。</p>
+<p>用法範例: <a href="https://gist.github.com/domen111/64cb6628cd57c2ffa4f91024ba6190ae" target="_blank" rel="noopener">https://gist.github.com/domen111/64cb6628cd57c2ffa4f91024ba6190ae</a></p>
+<p>接著在 keras 上需要利用 <code>keras.layers.Embedding</code>來把<code>index2vec</code>傳入，<code>keras.layers.Embedding</code>參數如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keras.layers.Embedding(input_dim, output_dim, embeddings_initializer=<span class="string">'uniform'</span>, embeddings_regularizer=<span class="keyword">None</span>, activity_regularizer=<span class="keyword">None</span>, embeddings_constraint=<span class="keyword">None</span>, mask_zero=<span class="keyword">False</span>, input_length=<span class="keyword">None</span>)</span><br></pre></td></tr></table></figure></p>
+<p>在 model 的第一層加入：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model.add(Embedding(index2vec.shape[<span class="number">0</span>], index2vec.shape[<span class="number">1</span>], weights=[index2vec], trainable=<span class="keyword">False</span>))</span><br></pre></td></tr></table></figure></p>
+<p><code>weights</code>指定要把每個詞彙 Embedding 成什麼，也就是我們的 <code>index2vec</code> 表格，<code>input_dim</code>指定字典的大小，<code>output_dim</code>指定向量的長度。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://domen-blog.github.io/posts/2015-09-15/poj-1456/" data-id="cjvdl5u4b0014zd2j6y6312kk" class="article-share-link">Share</a>
+      <a data-url="https://domen-blog.github.io/posts/2019-05-05/keras-embedding/" data-id="cjvdl5u3z000qzd2js965cfhn" class="article-share-link">Share</a>
       
-        <a href="https://domen-blog.github.io/posts/2015-09-15/poj-1456/#disqus_thread" class="article-comment-link">Comments</a>
+        <a href="https://domen-blog.github.io/posts/2019-05-05/keras-embedding/#disqus_thread" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/poj/">POJ</a></li></ul>
-
     </footer>
   </div>
   
     
 <nav id="article-nav">
   
-    <a href="/posts/2015-09-20/tioj-1851/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          TIOJ 1851 - 第五顆星球的點燈人
-        
-      </div>
-    </a>
   
-  
-    <a href="/posts/2015-09-14/codeforces-280b/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/posts/2016-09-19/online-judge-multiple-input/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Codeforces 280B - Maximum Xor Secondary</div>
+      <div class="article-nav-title">Online Judge 基礎觀念：多測資輸入不需把資料都讀入後再輸出</div>
     </a>
   
 </nav>
@@ -295,7 +288,7 @@ ga('send', 'pageview');
 <script>
   var disqus_shortname = 'domenblog';
   
-  var disqus_url = 'https://domen-blog.github.io/posts/2015-09-15/poj-1456/';
+  var disqus_url = 'https://domen-blog.github.io/posts/2019-05-05/keras-embedding/';
   
   (function(){
     var dsq = document.createElement('script');

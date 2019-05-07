@@ -3,20 +3,15 @@
 <head>
   <meta charset="utf-8">
   
-  <title>POJ 1456 - Supermarket | Domen&#39;s Programming World</title>
+  <title>Category: Machine Learning | Domen&#39;s Programming World</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Link: http://poj.org/problem?id=1456 把物品丟到時間軸上，反過來做就變成水題了，用priority_queue即可滿有趣的一題，關鍵在於能不能想到把時間反轉解決">
-<meta name="keywords" content="POJ">
-<meta property="og:type" content="article">
-<meta property="og:title" content="POJ 1456 - Supermarket">
-<meta property="og:url" content="https://domen-blog.github.io/posts/2015-09-15/poj-1456/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Domen&#39;s Programming World">
+<meta property="og:url" content="https://domen-blog.github.io/categories/machine-learning/index.html">
 <meta property="og:site_name" content="Domen&#39;s Programming World">
-<meta property="og:description" content="Link: http://poj.org/problem?id=1456 把物品丟到時間軸上，反過來做就變成水題了，用priority_queue即可滿有趣的一題，關鍵在於能不能想到把時間反轉解決">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-04-05T03:40:11.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="POJ 1456 - Supermarket">
-<meta name="twitter:description" content="Link: http://poj.org/problem?id=1456 把物品丟到時間軸上，反過來做就變成水題了，用priority_queue即可滿有趣的一題，關鍵在於能不能想到把時間反轉解決">
+<meta name="twitter:title" content="Domen&#39;s Programming World">
 <link rel="publisher" href="https://plus.google.com/+%E8%98%87%E5%A4%9A%E9%96%80domen">
   
     <link rel="alternative" href="/atom.xml" title="Domen&#39;s Programming World" type="application/atom+xml">
@@ -87,77 +82,39 @@ ga('send', 'pageview');
   </div>
 </div>
       <div class="outer">
-        <section id="main"><article id="post-poj-1456" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/posts/2015-09-15/poj-1456/" class="article-date">
-  <time datetime="2015-09-14T16:00:00.000Z" itemprop="datePublished">2015-09-15</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/competitive-programming/">Competitive Programming</a>►<a class="article-category-link" href="/categories/competitive-programming/problems/">Problems</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+        <section id="main">
   
-    <h1 class="article-title" itemprop="name">
-      POJ 1456 - Supermarket
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2019" class="archive-year">2019</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/posts/2019-05-05/keras-embedding/" class="archive-article-date">
+  <time datetime="2019-05-05T08:25:57.000Z" itemprop="datePublished">May 5</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/posts/2019-05-05/keras-embedding/">Keras Embedding Layer 搭配 gensim Word2Vec 用法</a>
     </h1>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Link: <a href="http://poj.org/problem?id=1456" target="_blank" rel="noopener">http://poj.org/problem?id=1456</a></p>
-<p>把物品丟到時間軸上，反過來做就變成水題了，用priority_queue即可<br>滿有趣的一題，關鍵在於能不能想到把時間反轉解決<br><a id="more"></a><br><figure class="highlight cpp"><figcaption><span>AC code</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; a[<span class="number">10010</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ios::sync_with_stdio(<span class="number">0</span>);</span><br><span class="line">    <span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">10000</span>;i++)</span><br><span class="line">            a[i].clear();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> p,q;</span><br><span class="line">            <span class="built_in">cin</span>&gt;&gt;p&gt;&gt;q;</span><br><span class="line">            a[q].push_back(p);</span><br><span class="line">        &#125;</span><br><span class="line">        priority_queue&lt;<span class="keyword">int</span>&gt; pq;</span><br><span class="line">        <span class="keyword">int</span> ans=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">10000</span>;i&gt;=<span class="number">1</span>;i--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;a[i].size();j++)</span><br><span class="line">                pq.push(a[i][j]);</span><br><span class="line">            <span class="keyword">if</span>(pq.size())</span><br><span class="line">                ans+=pq.top(), pq.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="string">'\n'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://domen-blog.github.io/posts/2015-09-15/poj-1456/" data-id="cjvdl5u4b0014zd2j6y6312kk" class="article-share-link">Share</a>
-      
-        <a href="https://domen-blog.github.io/posts/2015-09-15/poj-1456/#disqus_thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/poj/">POJ</a></li></ul>
-
-    </footer>
+    </header>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/posts/2015-09-20/tioj-1851/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          TIOJ 1851 - 第五顆星球的點燈人
-        
-      </div>
-    </a>
-  
-  
-    <a href="/posts/2015-09-14/codeforces-280b/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Codeforces 280B - Maximum Xor Secondary</div>
-    </a>
-  
-</nav>
-
-  
 </article>
-
-
-<section id="comments">
-  <div id="disqus_thread">
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  </div>
-</section>
+  
+  
+    </div></section>
+  
 </section>
         
           <aside id="sidebar">
@@ -295,13 +252,11 @@ ga('send', 'pageview');
 <script>
   var disqus_shortname = 'domenblog';
   
-  var disqus_url = 'https://domen-blog.github.io/posts/2015-09-15/poj-1456/';
-  
   (function(){
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
   })();
 </script>
