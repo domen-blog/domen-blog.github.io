@@ -84,6 +84,64 @@ ga('send', 'pageview');
       <div class="outer">
         <section id="main">
   
+    <article id="post-just-ctf-2019" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/posts/2019-12-22/just-ctf-2019/" class="article-date">
+  <time datetime="2019-12-22T12:30:58.000Z" itemprop="datePublished">2019-12-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/security/">Security</a>►<a class="article-category-link" href="/categories/security/ctf/">CTF</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/posts/2019-12-22/just-ctf-2019/">justCTF 2019 Writeup</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Link: <a href="https://2019.justctf.team/" target="_blank" rel="noopener">https://2019.justctf.team/</a></p>
+<p>這算是我第一場（比較認真打的）CTF 比賽，於是來發一個公開的 writeup 吧！</p>
+<p>我和 3 個同學組隊參加這場比賽，順便當成計算機安全課程 Final CTF 的賽前練習。</p>
+<h2 id="Sanity-check"><a href="#Sanity-check" class="headerlink" title="Sanity check"></a>Sanity check</h2><p>這場比賽的簽到題，雖然說是簽到題，雖然算是簽到題但 flag 也沒那麼好找啦！discord 上面就有一些人哀嚎解不出這題 😂。</p>
+<p>這題的 flag 其實就是在比賽規則中寫的範例 flag：<code>justCTF{something_h3re!}</code>，還好我看規則時有試著把範例 flag 貼上去看看，所以沒被這題卡住 :) 。</p>
+<h2 id="Will-it-stop"><a href="#Will-it-stop" class="headerlink" title="Will it stop?"></a>Will it stop?</h2><h3 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h3><p>這題的概念大概是：把你的 code 傳上對方的伺服器，然後它會幫你編譯。就 PDF 中的故事而言，它理論上還會在伺服器上執行你的程式，但實際上假如你上傳一個能夠成功編譯的程式碼上去，linker 會報錯（根據 discord，這是正常的），所以這題是要你在 compile 階段去攻下 flag。</p>
+<h3 id="解題過程"><a href="#解題過程" class="headerlink" title="解題過程"></a>解題過程</h3><p>這是我一開賽就看的題目，那時候也沒注意到這題的難度被歸類為 Medium 而非 Easy，覺得有趣就看了。</p>
+<p>看到這題我就馬上想到用 <code>#include &quot;path/to/flag&quot;</code> 的方式來讓我輸出機器上的檔案，然而我卻猜不到 flag 在哪裡。根據題目中的提示，flag 在使用者的家目錄，然而我卻沒辦法猜出使用者名稱，我試著研究了一些 GCC 的 pragma，沒有一個能夠幫助我找到使用者名稱或工作目錄等有用的資訊。</p>
+<p>星期六晚上回來和隊友討論這題（當天下午有別的事情就沒參賽），隊友建議我看看 <code>/etc/passwd</code>，於是就輕鬆看到了以下資訊（使用者名稱）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">How many lines does your C program parsing a Python code have?</span><br><span class="line">1</span><br><span class="line">Write your program now:</span><br><span class="line">#include &quot;/etc/passwd&quot;</span><br><span class="line">Ok, let&apos;s build it!</span><br><span class="line">In file included from &lt;stdin&gt;:1:0:</span><br><span class="line">/etc/passwd:1:8: error: expected &apos;=&apos;, &apos;,&apos;, &apos;;&apos;, &apos;asm&apos; or &apos;__attribute__&apos; before &apos;:&apos; token</span><br><span class="line"> aturing:x:1000:1000::/home/aturing:/bin/sh</span><br><span class="line">        ^</span><br><span class="line">COMPILATION FAILED</span><br></pre></td></tr></table></figure></p>
+<p>起初，我其實嘗試過 include <code>/proc/self</code> 底下的東西，但找不到檔案，接著就沒繼續嘗試 include 系統文件了。果然有隊友討論很重要，否則這題卡在這點上就太虧了！</p>
+        
+          <p class="article-more-link">
+            <a href="/posts/2019-12-22/just-ctf-2019/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://domen-blog.github.io/posts/2019-12-22/just-ctf-2019/" data-id="ck4h3e3bi0000g42jy1bvq5bd" class="article-share-link">Share</a>
+      
+        <a href="https://domen-blog.github.io/posts/2019-12-22/just-ctf-2019/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ctf/">CTF</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-keras-embedding" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/posts/2019-05-05/keras-embedding/" class="article-date">
@@ -121,7 +179,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://domen-blog.github.io/posts/2019-05-05/keras-embedding/" data-id="cjvdl5u3z000qzd2js965cfhn" class="article-share-link">Share</a>
+      <a data-url="https://domen-blog.github.io/posts/2019-05-05/keras-embedding/" data-id="cjvao9q3w004k3e2jitokrboo" class="article-share-link">Share</a>
       
         <a href="https://domen-blog.github.io/posts/2019-05-05/keras-embedding/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -178,7 +236,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://domen-blog.github.io/posts/2016-09-19/online-judge-multiple-input/" data-id="cjvdl5u44000tzd2jtq2s8y3w" class="article-share-link">Share</a>
+      <a data-url="https://domen-blog.github.io/posts/2016-09-19/online-judge-multiple-input/" data-id="cjvao6dlh000m3e2ju89qai03" class="article-share-link">Share</a>
       
         <a href="https://domen-blog.github.io/posts/2016-09-19/online-judge-multiple-input/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -230,7 +288,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://domen-blog.github.io/posts/2016-04-14/uva-1569/" data-id="cjvdl5u5d002hzd2jfec2zkmy" class="article-share-link">Share</a>
+      <a data-url="https://domen-blog.github.io/posts/2016-04-14/uva-1569/" data-id="cjvao6dmu002f3e2jvinii9se" class="article-share-link">Share</a>
       
         <a href="https://domen-blog.github.io/posts/2016-04-14/uva-1569/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -281,7 +339,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://domen-blog.github.io/posts/2016-04-11/tioj-1272/" data-id="cjvdl5u4g001czd2jfr2jp4py" class="article-share-link">Share</a>
+      <a data-url="https://domen-blog.github.io/posts/2016-04-11/tioj-1272/" data-id="cjvao6dlr00113e2j56zo4r8c" class="article-share-link">Share</a>
       
         <a href="https://domen-blog.github.io/posts/2016-04-11/tioj-1272/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -330,7 +388,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://domen-blog.github.io/posts/2016-04-10/google-code-jam-introduction/" data-id="cjvdl5u3t000hzd2jbpjkpo62" class="article-share-link">Share</a>
+      <a data-url="https://domen-blog.github.io/posts/2016-04-10/google-code-jam-introduction/" data-id="cjvao6dl5000c3e2jp66kzu72" class="article-share-link">Share</a>
       
         <a href="https://domen-blog.github.io/posts/2016-04-10/google-code-jam-introduction/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -387,7 +445,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://domen-blog.github.io/posts/2016-04-03/ioi-2014-game/" data-id="cjvdl5u3x000ozd2jd2jekecj" class="article-share-link">Share</a>
+      <a data-url="https://domen-blog.github.io/posts/2016-04-03/ioi-2014-game/" data-id="cjvao6dlb000h3e2j1r9hmzxk" class="article-share-link">Share</a>
       
         <a href="https://domen-blog.github.io/posts/2016-04-03/ioi-2014-game/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -437,7 +495,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://domen-blog.github.io/posts/2016-03-31/move-to-hexo/" data-id="cjvdl5u480010zd2jivsydwii" class="article-share-link">Share</a>
+      <a data-url="https://domen-blog.github.io/posts/2016-03-31/move-to-hexo/" data-id="cjvao6dle000j3e2j4wf6bnfn" class="article-share-link">Share</a>
       
         <a href="https://domen-blog.github.io/posts/2016-03-31/move-to-hexo/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -482,7 +540,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://domen-blog.github.io/posts/2015-12-01/forum-post-moving/" data-id="cjvdl5u3r000ezd2jkvjpmqjf" class="article-share-link">Share</a>
+      <a data-url="https://domen-blog.github.io/posts/2015-12-01/forum-post-moving/" data-id="cjvao6dl300083e2jz4md5dj6" class="article-share-link">Share</a>
       
         <a href="https://domen-blog.github.io/posts/2015-12-01/forum-post-moving/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -533,7 +591,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://domen-blog.github.io/posts/2015-11-26/tioj-1318/" data-id="cjvdl5u4p001mzd2j0dvxzkel" class="article-share-link">Share</a>
+      <a data-url="https://domen-blog.github.io/posts/2015-11-26/tioj-1318/" data-id="cjvao6dlx001c3e2j7r5f40jt" class="article-share-link">Share</a>
       
         <a href="https://domen-blog.github.io/posts/2015-11-26/tioj-1318/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -547,59 +605,9 @@ ga('send', 'pageview');
 
 
   
-    <article id="post-zerojudge-b542" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/posts/2015-11-25/zerojudge-b542/" class="article-date">
-  <time datetime="2015-11-24T16:00:00.000Z" itemprop="datePublished">2015-11-25</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/competitive-programming/">Competitive Programming</a>►<a class="article-category-link" href="/categories/competitive-programming/problems/">Problems</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/posts/2015-11-25/zerojudge-b542/">ZeroJudge b542 - 聽到這兩個人的身高，讓十萬人都驚呆了</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Link: <a href="http://zerojudge.tw/ShowProblem?problemid=b542" target="_blank" rel="noopener">http://zerojudge.tw/ShowProblem?problemid=b542</a></p>
-<p>每次詢問使用爬行法O(N)求是否有相差K的兩數，總複雜度O(NQ)<br>
-        
-          <p class="article-more-link">
-            <a href="/posts/2015-11-25/zerojudge-b542/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://domen-blog.github.io/posts/2015-11-25/zerojudge-b542/" data-id="cjvdl5u5f002lzd2jd7gx609d" class="article-share-link">Share</a>
-      
-        <a href="https://domen-blog.github.io/posts/2015-11-25/zerojudge-b542/#disqus_thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/two-pointer/">Two Pointer</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/zerojudge/">ZeroJudge</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 </section>
@@ -610,7 +618,7 @@ ga('send', 'pageview');
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/algorithm/">Algorithm</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">Blog</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/competitive-programming/">Competitive Programming</a><span class="category-list-count">26</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/competitive-programming/introduction/">Introduction</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/competitive-programming/problems/">Problems</a><span class="category-list-count">24</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/machine-learning/">Machine Learning</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/algorithm/">Algorithm</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">Blog</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/competitive-programming/">Competitive Programming</a><span class="category-list-count">26</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/competitive-programming/introduction/">Introduction</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/competitive-programming/problems/">Problems</a><span class="category-list-count">24</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/machine-learning/">Machine Learning</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/security/">Security</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/security/ctf/">CTF</a><span class="category-list-count">1</span></li></ul></li></ul>
     </div>
   </div>
 
@@ -619,7 +627,7 @@ ga('send', 'pageview');
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/bit/">BIT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bst/">BST</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codeforces/">Codeforces</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dp/">DP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/embedding/">Embedding</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/google-code-jam/">Google Code Jam</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/graph/">Graph</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hoj/">HOJ</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ioi/">IOI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/keras/">Keras</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/poj/">POJ</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rnn/">RNN</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/segment-tree/">Segment Tree</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tioj/">TIOJ</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/toj/">TOJ</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/two-pointer/">Two Pointer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uva/">UVa</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xor/">XOR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zerojudge/">ZeroJudge</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/math/">math</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ntucsiec2016/">ntucsiec2016</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/樹壓平/">樹壓平</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/bit/">BIT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bst/">BST</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ctf/">CTF</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codeforces/">Codeforces</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dp/">DP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/embedding/">Embedding</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/google-code-jam/">Google Code Jam</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/graph/">Graph</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hoj/">HOJ</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ioi/">IOI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/keras/">Keras</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/poj/">POJ</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rnn/">RNN</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/segment-tree/">Segment Tree</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tioj/">TIOJ</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/toj/">TOJ</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/two-pointer/">Two Pointer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uva/">UVa</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xor/">XOR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zerojudge/">ZeroJudge</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/math/">math</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ntucsiec2016/">ntucsiec2016</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/樹壓平/">樹壓平</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -628,7 +636,7 @@ ga('send', 'pageview');
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/bit/" style="font-size: 15px;">BIT</a> <a href="/tags/bst/" style="font-size: 10px;">BST</a> <a href="/tags/codeforces/" style="font-size: 10px;">Codeforces</a> <a href="/tags/dp/" style="font-size: 10px;">DP</a> <a href="/tags/embedding/" style="font-size: 10px;">Embedding</a> <a href="/tags/google-code-jam/" style="font-size: 10px;">Google Code Jam</a> <a href="/tags/graph/" style="font-size: 10px;">Graph</a> <a href="/tags/hoj/" style="font-size: 10px;">HOJ</a> <a href="/tags/ioi/" style="font-size: 10px;">IOI</a> <a href="/tags/keras/" style="font-size: 10px;">Keras</a> <a href="/tags/poj/" style="font-size: 10px;">POJ</a> <a href="/tags/rnn/" style="font-size: 10px;">RNN</a> <a href="/tags/segment-tree/" style="font-size: 15px;">Segment Tree</a> <a href="/tags/tioj/" style="font-size: 20px;">TIOJ</a> <a href="/tags/toj/" style="font-size: 15px;">TOJ</a> <a href="/tags/two-pointer/" style="font-size: 10px;">Two Pointer</a> <a href="/tags/uva/" style="font-size: 15px;">UVa</a> <a href="/tags/xor/" style="font-size: 10px;">XOR</a> <a href="/tags/zerojudge/" style="font-size: 15px;">ZeroJudge</a> <a href="/tags/math/" style="font-size: 10px;">math</a> <a href="/tags/ntucsiec2016/" style="font-size: 10px;">ntucsiec2016</a> <a href="/tags/樹壓平/" style="font-size: 10px;">樹壓平</a>
+      <a href="/tags/bit/" style="font-size: 15px;">BIT</a> <a href="/tags/bst/" style="font-size: 10px;">BST</a> <a href="/tags/ctf/" style="font-size: 10px;">CTF</a> <a href="/tags/codeforces/" style="font-size: 10px;">Codeforces</a> <a href="/tags/dp/" style="font-size: 10px;">DP</a> <a href="/tags/embedding/" style="font-size: 10px;">Embedding</a> <a href="/tags/google-code-jam/" style="font-size: 10px;">Google Code Jam</a> <a href="/tags/graph/" style="font-size: 10px;">Graph</a> <a href="/tags/hoj/" style="font-size: 10px;">HOJ</a> <a href="/tags/ioi/" style="font-size: 10px;">IOI</a> <a href="/tags/keras/" style="font-size: 10px;">Keras</a> <a href="/tags/poj/" style="font-size: 10px;">POJ</a> <a href="/tags/rnn/" style="font-size: 10px;">RNN</a> <a href="/tags/segment-tree/" style="font-size: 15px;">Segment Tree</a> <a href="/tags/tioj/" style="font-size: 20px;">TIOJ</a> <a href="/tags/toj/" style="font-size: 15px;">TOJ</a> <a href="/tags/two-pointer/" style="font-size: 10px;">Two Pointer</a> <a href="/tags/uva/" style="font-size: 15px;">UVa</a> <a href="/tags/xor/" style="font-size: 10px;">XOR</a> <a href="/tags/zerojudge/" style="font-size: 15px;">ZeroJudge</a> <a href="/tags/math/" style="font-size: 10px;">math</a> <a href="/tags/ntucsiec2016/" style="font-size: 10px;">ntucsiec2016</a> <a href="/tags/樹壓平/" style="font-size: 10px;">樹壓平</a>
     </div>
   </div>
 
@@ -637,7 +645,7 @@ ga('send', 'pageview');
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li></ul>
     </div>
   </div>
 
@@ -647,6 +655,10 @@ ga('send', 'pageview');
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/posts/2019-12-22/just-ctf-2019/">justCTF 2019 Writeup</a>
+          </li>
         
           <li>
             <a href="/posts/2019-05-05/keras-embedding/">Keras Embedding Layer 搭配 gensim Word2Vec 用法</a>
@@ -662,10 +674,6 @@ ga('send', 'pageview');
         
           <li>
             <a href="/posts/2016-04-11/tioj-1272/">TIOJ 1272 - The Agency</a>
-          </li>
-        
-          <li>
-            <a href="/posts/2016-04-10/google-code-jam-introduction/">Google Code Jam 賽制介紹</a>
           </li>
         
       </ul>
